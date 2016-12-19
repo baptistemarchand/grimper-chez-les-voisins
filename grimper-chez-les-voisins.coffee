@@ -43,29 +43,5 @@ request.send()
 
 css = document.createElement("style")
 css.type = "text/css"
-css.innerHTML = "table {
-      border-collapse: collapse;
-      font-size: 0.8em;
-      text-align: center;
-      }
-
-td, th {
-      padding: 10px;
-      background: #dcecf5;
-      border: 1px solid #bad8eb;
-      }
-
-      .club, th {
-      background: #fff;
-      font-weight: normal;
-      font-size: 1.1em;
-      }
-
-      .club {
-      text-align: left;
-      }
-
-      td:empty {
-      background: #fff;
-      }"
+css.innerHTML = "table{border-collapse:collapse;font-size:.8em;text-align:center}td,th{padding:10px;background:#dcecf5;border:1px solid #bad8eb}.club,td:empty,th{background:#fff}.club,th{font-weight:400;font-size:1.1em}.club{text-align:left}"
 document.body.appendChild(css)
