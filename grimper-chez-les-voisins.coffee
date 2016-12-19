@@ -13,35 +13,29 @@ days =
   dimanche: 'yevm'
 
 request = new XMLHttpRequest()
-request.open('GET', API_URL, true)
+request.open('GET', API_URL)
 request.onload = () ->
-  if request.status < 200 || request.status >= 400
-    console.error 'Error retreiving data', request
-  else
-    data = JSON.parse(request.responseText)
-    result = []
-    for i in [3..12]
-      continue if not data.feed.entry[i]['gsx$_cn6ca']?
-      
-      club_name = data.feed.entry[i]['gsx$_cn6ca']['$t'].replace(' / Faites le mur', '').replace(' 20ème', '')
-      result[club_name] = []
-  
-      for day,key of days
-        result[club_name].push data.feed.entry[i]['gsx$_c'+key]?['$t'].replace(' à partir du 7 novembre', '').replace(/\s+/g, '').replace('à', '-').replace('de', '').replace('et', '<br>')
-  
-    final_table = '<table><thead><tr><th></th><th>' + (Object.keys(days).join '</th><th>') + '</th></tr></thead><tbody>'
-  
-    for club,times of result
-      final_table += '<tr><td class="club">' + club + '</td><td>' + (times.join '</td><td>') + '</td></tr>'
+  if request.status < 200 || request.status > 399
+    return
+  data = JSON.parse(request.responseText).feed.entry
+  result = []
+  name = 'gsx$_cn6ca'
+  for i in [3..12]
+    continue if not data[i][name]?
 
-    document.getElementById("grimper-chez-les-voisins").innerHTML = final_table + '</tbody></table>'
+    club_name = data[i][name]['$t'].replace(/ \/ \w+ le mur/, '').replace(' 20ème', '')
+    result[club_name] = []
 
-request.onerror = () ->
-    console.error 'Error retreiving data'
+    for day,key of days
+      result[club_name].push data[i]['gsx$_c'+key]?['$t'].replace(/ à \w+ du 7 \w+/, '').replace(/\s+/g, '').replace('à', '-').replace('de', '').replace('et', '<br>')
+
+  final_table = '<table><thead><tr><th></th><th>' + (Object.keys(days).join '</th><th>') + '</th></tr></thead><tbody>'
+
+  td = '</td><td>'
+  for club,times of result
+    final_table += '<tr><td class="club">' + club + td + (times.join td) + '</td></tr>'
+
+  document.getElementById("gclv").innerHTML = final_table + '</tbody></table>'
 
 request.send()
 
-css = document.createElement("style")
-css.type = "text/css"
-css.innerHTML = "table{border-collapse:collapse;font-size:.8em;text-align:center}td,th{padding:10px;background:#dcecf5;border:1px solid #bad8eb}.club,td:empty,th{background:#fff}.club,th{font-weight:400;font-size:1.1em}.club{text-align:left}"
-document.body.appendChild(css)
