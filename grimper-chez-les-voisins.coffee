@@ -4,13 +4,13 @@ API_URL = "https://spreadsheets.google.com/feeds/list/1j6qQrXMt1DNh8QAyov7Q2dSkk
 # commentaires: _cztg3
 
 days =
-  lundi: 'cpzh4'
-  mardi: 'cre1l'
-  mercredi: 'chk2m'
-  jeudi: 'ciyn3'
-  vendredi: 'ckd7g'
-  samedi: 'clrrx'
-  dimanche: 'cyevm'
+  lundi: 'pzh4'
+  mardi: 're1l'
+  mercredi: 'hk2m'
+  jeudi: 'iyn3'
+  vendredi: 'kd7g'
+  samedi: 'lrrx'
+  dimanche: 'yevm'
 
 request = new XMLHttpRequest()
 request.open('GET', API_URL, true)
@@ -27,7 +27,7 @@ request.onload = () ->
       result[club_name] = []
   
       for day,key of days
-        result[club_name].push data.feed.entry[i]['gsx$_'+key]?['$t'].replace(' à partir du 7 novembre', '').replace(/\s+/g, '').replace('à', '-').replace('de', '').replace('et', '<br>')
+        result[club_name].push data.feed.entry[i]['gsx$_c'+key]?['$t'].replace(' à partir du 7 novembre', '').replace(/\s+/g, '').replace('à', '-').replace('de', '').replace('et', '<br>')
   
     final_table = '<table><thead><tr><th></th><th>' + (Object.keys(days).join '</th><th>') + '</th></tr></thead><tbody>'
   
