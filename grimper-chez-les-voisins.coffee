@@ -1,4 +1,4 @@
-API_URL = "https://spreadsheets.google.com/feeds/list/1j6qQrXMt1DNh8QAyov7Q2dSkkcJeqpXr5_1kCz1LWFw/default/public/values?alt=json"
+API_URL = "https://spreadsheets.google.com/feeds/list/1Ne8EcecR114npRqZG9SS3435R9BuQguCIasvHMlVI4U/default/public/values?alt=json"
 
 # nom: _cn6ca
 # commentaires: _cztg3
@@ -35,7 +35,7 @@ request.onload = () ->
   for club,times of result
     final_table += '<tr><td class="club">' + club + td + (times.join td) + '</td></tr>'
 
-  document.getElementById("gclv").innerHTML = final_table + '</tbody></table>'
+  document.getElementById("grimper-chez-les-voisins").innerHTML = final_table + '</tbody></table>'
 
 request.send()
 
